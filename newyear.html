@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Assignment 2</title>
+	<link href="css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <h3 class="">Assignment 2</h3>
+    <div>
+    	<div>
+    		<label for="num">
+    			<b>Enter current date and check remaining days for current year.</b>
+			</label>
+    	</div>
+        <div class="input">
+    		<label for="num">Enter Date: </label>
+    		<input type="text" id="current_date" name="current_date" placeholder="MM/DD/YYYY" class="form-control datepicker" />
+    	</div>
+    	<div>
+    		<input type="button" name="check" value="Check" class="btn btn-md btn-success checkdate" onclick="checkDate();">
+    	</div>
+    </div>
+    <script type="text/javascript">
+		function checkDate(){
+			var enteredDate = document.getElementById("current_date").value;
+			var isValidDate = verifyDate(enteredDate);
+		    if(!isValidDate){
+		         alert("Please enter a valid date in MM/DD/YYYY format");
+		    }
+		    else{
+		    	var from = document.getElementById("current_date").value.split("/");
+		    	
+				var date1 = new Date(from);
+				var year = date1.getFullYear();
+				var date2 = new Date(year+1,0,0);
+				var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+				var diffDays = Math.floor(timeDiff / (1000 * 60 * 60 * 24)); 
+				alert('Days remaining till new year: '+parseInt(diffDays+1));
+		    }
+		}
+
+		function verifyDate(dateEntered){
+		
+		    var newDate = dateEntered;
+		    if(newDate == '')
+		       return false;
+
+		    var expr = /^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/; 
+		    var dateFormat = newDate.match(expr); 
+
+		    if (dateFormat == null){
+		        return false;
+		    }
+
+		    month = dateFormat[1];
+		    day= dateFormat[3];
+		    year = dateFormat[5];        
+
+		    if (month < 1 || month > 12){
+		        return false;
+		    }else if (day < 1 || day> 31){ 
+		        return false;
+		    }else if ((month==4 || month==6 || month==9 || month==11) && day ==31){
+		        return false;
+		    }else if (month == 2){
+		        
+			var isLeapYear = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+		    
+			if (day> 29 || (day ==29 && !isLeapYear)){
+		            return false
+		        }
+		    }
+		    return true;
+		}    	
+    </script>
+</body>
+</html>

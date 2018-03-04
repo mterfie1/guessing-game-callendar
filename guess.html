@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Assignment 1</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	    <div class="">
+	            <div class="">
+	                <h3 class="">Assignment 1</h3>
+	            </div>
+	        </div>
+	        <div class="">
+	        	<div class="">
+	        		<label for="num"><b>Note: Guess any number between 1 to 1000 and enter into textbox.</label>
+	        		
+	        	</div>
+		        <div class="input">
+	        		<label for="num">Enter Number: </label>
+	        		<input type="text" id="num" name="num" placeholder="Enter number between 1 to 1000" class="form-control" />
+	        	</div>
+	        	<div class="">
+	        		<input type="button" name="check" value="Check" class="btn btn-md btn-success" onclick="checkNumber();">
+	        	</div>
+	        </div>
+	        <input type="hidden" name="random_number" value="" id="random_number">
+	       
+	    </div>
+	</section>
+<script type="text/javascript">
+	
+var random_num = Math.floor(Math.random() * 1000) + 1;
+document.getElementById("random_number").value=random_num;
+
+function checkNumber(){
+	var number = parseInt(document.getElementById("num").value);
+	var random_number = parseInt(document.getElementById("random_number").value);
+
+	if(number==random_number){
+		alert('Congrats!! You found my number!');
+	}
+	else if(number>=random_number){
+		alert('Your guess was too high!');
+	}
+	else if(number<=random_number){
+		alert('Your guess was too low!');
+	}
+	
+}
+</script>
+</body>
+</html>
